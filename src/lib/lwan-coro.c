@@ -50,9 +50,10 @@ void __asan_poison_memory_region(void const volatile *addr, size_t size);
 void __asan_unpoison_memory_region(void const volatile *addr, size_t size);
 #endif
 
-#if !defined(SIGSTKSZ)
+//#if !defined(SIGSTKSZ)
+#undef SIGSTKSZ
 #define SIGSTKSZ 16384
-#endif
+//#endif
 
 #ifdef HAVE_BROTLI
 #define CORO_STACK_SIZE (8 * SIGSTKSZ)

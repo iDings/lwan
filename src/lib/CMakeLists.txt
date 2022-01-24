@@ -122,8 +122,8 @@ if (HAVE_LIBUCONTEXT)
 		BUILD_IN_SOURCE ON
 
 		CONFIGURE_COMMAND ""
-		BUILD_COMMAND make
-		INSTALL_COMMAND make install DESTDIR=${CMAKE_BINARY_DIR}
+        BUILD_COMMAND CC=${CMAKE_C_COMPILER} make ARCH=armv7l
+		INSTALL_COMMAND CC=${CMAKE_C_COMPILER} make ARCH=armv7l install DESTDIR=${CMAKE_BINARY_DIR}
 
 		BUILD_BYPRODUCTS ${CMAKE_BINARY_DIR}/lib/libucontext.a
 
@@ -134,6 +134,7 @@ if (HAVE_LIBUCONTEXT)
 
 	set(ADDITIONAL_LIBRARIES ${CMAKE_BINARY_DIR}/lib/libucontext.a ${ADDITIONAL_LIBRARIES} PARENT_SCOPE)
 	include_directories(${CMAKE_BINARY_DIR}/usr/include)
+    target_include_directories(lwan-static PUBLIC ${CMAKE_BINARY_DIR}/usr/include)
 else ()
 	message(STATUS "Using built-in context switching routines for ${CMAKE_SYSTEM_PROCESSOR} processors")
 endif ()

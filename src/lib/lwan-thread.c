@@ -105,7 +105,7 @@ static void graceful_close(struct lwan *l,
     /* close(2) will be called when the coroutine yields with CONN_CORO_ABORT */
 }
 
-#if defined(FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION)
+#if defined(FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION) || !defined(__SIZEOF_INT128__)
 static void lwan_random_seed_prng_for_thread(const struct lwan_thread *t)
 {
     (void)t;
@@ -1277,7 +1277,9 @@ void lwan_thread_init(struct lwan *l)
 
         if (adj_affinity) {
             l->thread.threads[i].cpu = schedtbl[i & n_threads];
+#if defined(__linux__) && defined(__x86_64__)
             adjust_thread_affinity(thread);
+#endif
         }
 
         pthread_barrier_wait(&l->thread.barrier);

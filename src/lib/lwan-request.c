@@ -1455,7 +1455,7 @@ static void log_request(struct lwan_request *request,
     char ip_buffer[INET6_ADDRSTRLEN];
 
     lwan_status_debug(
-        "%s [%s] %016lx \"%s %s HTTP/%s\" %d %s (r:%.3fms p:%.3fms)",
+        "%s [%s] %016"PRIx64" \"%s %s HTTP/%s\" %d %s (r:%.3fms p:%.3fms)",
         lwan_request_get_remote_address(request, ip_buffer),
         request->conn->thread->date.date, lwan_request_get_id(request),
         lwan_request_get_method_str(request), request->original_url.value,

@@ -58,14 +58,14 @@ else ()
 	set(HAVE_LUA 1)
 endif ()
 
-pkg_check_modules(BROTLI libbrotlienc libbrotlidec libbrotlicommon)
-if (BROTLI_FOUND)
-	list(APPEND ADDITIONAL_LIBRARIES "${BROTLI_LDFLAGS}")
-	if (NOT BROTLI_INCLUDE_DIRS STREQUAL "")
-		include_directories(${BROTLI_INCLUDE_DIRS})
-	endif ()
-	set(HAVE_BROTLI 1)
-endif ()
+#pkg_check_modules(BROTLI libbrotlienc libbrotlidec libbrotlicommon)
+#if (BROTLI_FOUND)
+#	list(APPEND ADDITIONAL_LIBRARIES "${BROTLI_LDFLAGS}")
+#	if (NOT BROTLI_INCLUDE_DIRS STREQUAL "")
+#		include_directories(${BROTLI_INCLUDE_DIRS})
+#	endif ()
+#	set(HAVE_BROTLI 1)
+#endif ()
 
 pkg_check_modules(ZSTD libzstd)
 if (ZSTD_FOUND)
@@ -244,8 +244,8 @@ endif()
 enable_c_flag_if_avail(-mtune=native C_FLAGS_REL HAVE_MTUNE_NATIVE)
 enable_c_flag_if_avail(-march=native C_FLAGS_REL HAVE_MARCH_NATIVE)
 
-enable_c_flag_if_avail(-fstack-protector-explicit CMAKE_C_FLAGS
-	HAVE_STACK_PROTECTOR_EXPLICIT)
+#enable_c_flag_if_avail(-fstack-protector-explicit CMAKE_C_FLAGS
+#	HAVE_STACK_PROTECTOR_EXPLICIT)
 
 #
 # Check if immediate binding and read-only global offset table flags

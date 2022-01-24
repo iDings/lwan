@@ -1492,7 +1492,9 @@ action_append:
 
 action_append_small: {
         uintptr_t val = (uintptr_t)chunk->data;
-        size_t len = strnlen((char *)&val, sizeof(val));
+        lwan_status_info("val:%s\n", (char *)val);
+        //size_t len = strnlen((char *)&val, sizeof(val));
+        size_t len = strlen((char *)&val);
 
         lwan_strbuf_append_str(buf, (char*)&val, len);
 
